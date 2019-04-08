@@ -1,16 +1,27 @@
 
 import Trie_Struct as Tr
-class main:
+import tqdm
+
+class Main:
     """
 
+
     """
-    words =['den','dear','do','disco']
-    root= Tr.TrieNode()
 
-    for words in words:
-        root.add_word(word)
+    with open('words.txt') as f:
+        words = f.readlines()
 
-    root.print_all()
 
-    print('de :')
-    root.auto_complete_word('de')
+
+    root = Tr.TrieNode()
+
+    for word in tqdm.tqdm(words):
+        root.add_word(word.strip('\n'))
+
+    del words
+
+    for i in range(5):
+        str = input('Enter you word :')
+        root.auto_complete_word(str)
+
+    
