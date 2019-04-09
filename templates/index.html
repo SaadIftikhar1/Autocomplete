@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+<body>
+
+<h2>Auto-comment Front End prototype</h2>
+
+<form action="http://localhost:5000/autocomplete" method="post">
+  Enter you word:<br>
+  <input type="text" name="Enter Query" value=" ">
+  <br>
+  Suggestion Count:<br>
+  <select name="Suggestion count">
+  <option value="" selected></option>
+  <option value="1"> 1</option>
+  <option value="3">3</option>
+  <option value="5">5</option>
+  <option value="10">10</option>
+  </select>
+ <!-- <input type="text" name="Data base" value=""> -->
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<p></p>
+<p>On clicking submit system will return with suggestions for your partial word.</p>
+<p></p>
+<table>
+  <tr>
+      <th>Autocomplete Suggestions </th>
+      </tr>
+  <tr>
+    <td>{{suggestion}}</td>
+  </tr>
+</table>
+
+
+
+</body>
+</html>
+
