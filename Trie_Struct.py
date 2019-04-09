@@ -1,4 +1,6 @@
-
+"""
+Module for Trie Data Structure
+"""
 
 class TrieNode:
 
