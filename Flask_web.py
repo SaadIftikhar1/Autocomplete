@@ -15,16 +15,22 @@ root1 = Tr.TrieNode()
 
 #del words
 
+
 @app.route('/output')
 def output():
     return render_template("index.html", name="Joe")
+
 
 @app.route('/autocomplete', methods=['POST','GET'])
 def autocomplete():
     if request.method == 'POST':
         string =request.form["Enter Query"]
         num_sug = request.form["Suggestion count"]
-        return render_template("index.html", suggestion="saad /n iftikhar /n is it possible" , numero=num_sug )
+        check = "This is a very long string " \
+        "that I wrote to help somebody " \
+        "who had a question about " \
+        "writing long strings in Python"
+        return render_template("index.html", suggestion= check , numero=num_sug )
     else:
         string = request.args.get["Enter Query"]
         num_sug = request.args.get["Suggestion count"]
