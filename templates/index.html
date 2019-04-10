@@ -9,20 +9,28 @@ table, th, td {
 </style>
 </head>
 <body>
+<div>
+<center>
+<p></p>
+
 
 <h2>Auto-comment Front End prototype</h2>
 
 <form action="http://localhost:5000/autocomplete" method="post">
   Enter you word:<br>
-  <input type="text" name="Enter Query" value=" ">
+  <input type="text" name="Enter Query" value=""  size="40">
   <br>
   Suggestion Count:<br>
   <select name="Suggestion count">
-  <option value="" selected></option>
-  <option value="1"> 1</option>
+  <option value="5" selected></option>
+  <option value="1">1</option>
+  <option value="2">2</option>
   <option value="3">3</option>
+  <option value="4">4</option>
   <option value="5">5</option>
+  <option value="8">8</option>
   <option value="10">10</option>
+  <option value="15">15</option>
   </select>
  <!-- <input type="text" name="Data base" value=""> -->
   <br><br>
@@ -30,8 +38,7 @@ table, th, td {
 </form>
 
 <p></p>
-<p>On clicking submit system will return with suggestions for your partial word.</p>
-<p></p>
+
 <table>
   <tr>
       <th>Autocomplete Suggestions </th>
@@ -40,9 +47,10 @@ table, th, td {
     <td>{{suggestion}}</td>
   </tr>
 </table>
-
-
-
+<p>On clicking submit system will return with suggestions for your partial word.</p>
+<p></p>
+</center>
+</div>
 </body>
 </html>
 
