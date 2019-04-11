@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, request
 import tqdm
 import Trie_gen as Tr1
 

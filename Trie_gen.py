@@ -1,7 +1,9 @@
-from operator import itemgetter
+"""
+Code based on the original code at : https://gist.github.com/tizz98/fbad67ac008b21e53c292543a32dfbac
+Author of original code : Elijah Wilson
+"""
 
-import hug
-import tqdm
+from operator import itemgetter
 
 
 class TrieNode:
@@ -13,7 +15,7 @@ class TrieNode:
         self.children = {}
         self.weight = -1
 
-    def add(self, word_part: str, *, weight: int=-1) -> None:
+    def add_word(self, word_part: str, *, weight: int=-1) -> None:
         if len(word_part) == 0:
             self.end_of_word = True
             self.weight = weight
@@ -21,7 +23,7 @@ class TrieNode:
 
         first_char = word_part[0]
         node = self.children.setdefault(first_char, TrieNode(first_char))
-        node.add(word_part[1:], weight=weight)
+        node.add_word(word_part[1:], weight=weight)
 
     def find_all(self, word_part: str, path: str=""):
         if self.end_of_word:
@@ -38,19 +40,7 @@ class TrieNode:
                 yield from node.find_all("", path + self.value)
 
 
-with open('words.txt') as f:
-    words = f.readlines()
 
-root = TrieNode("")
-
-print('Loading words')
-for word in tqdm.tqdm(words):
-    root.add(word.rstrip('\n'), weight=1)
-
-del words
-
-
-@hug.get('/autocomplete')
 def autocomplete(string: str, hug_timer):
     split_words = string.split()
     last_word = split_words[-1]

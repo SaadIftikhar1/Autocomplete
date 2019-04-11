@@ -1,3 +1,8 @@
+<!--
+HTML template file for the front end of the Auto-complete form
+Takes input from the web page and pass it to the Flask-based Python server
+and return the generated suggestions -->
+
 <!DOCTYPE html>
 <html lang="en">
 <html>
@@ -8,19 +13,20 @@ table, th, td {
 }
 </style>
 </head>
-<body>
+<body bgcolor="#E6E6FA">
 <div>
 <center>
 <p></p>
 
 
-<h2>Auto-comment Front End prototype</h2>
+<h2><font size="6">Auto-comment Front End prototype </font> </h2>
 
 <form action="http://localhost:5000/autocomplete" method="post">
-  Enter you word:<br>
+  <b><font size="4"> Enter you word:</font></b><br>
   <input type="text" name="Enter Query" value=""  size="40">
   <br>
-  Suggestion Count:<br>
+   <b><font size="3">
+     Suggestion Count: </font></b><br>
   <select name="Suggestion count">
   <option value="5" selected></option>
   <option value="1">1</option>
@@ -33,8 +39,8 @@ table, th, td {
   <option value="15">15</option>
   </select>
  <!-- <input type="text" name="Data base" value=""> -->
-  <br><br>
-  <input type="submit" value="Submit">
+ <br><br>
+  <input type="submit" value="Check">
 </form>
 
 <p></p>
@@ -47,7 +53,7 @@ table, th, td {
     <td>{{suggestion}}</td>
   </tr>
 </table>
-<p>On clicking submit system will return with suggestions for your partial word.</p>
+
 <p></p>
 </center>
 </div>
