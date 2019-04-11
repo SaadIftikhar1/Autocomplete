@@ -1,11 +1,32 @@
 from flask import Flask, render_template, request
 import tqdm
+import os
 import Trie_gen as Tr1
 
 app = Flask(__name__)
 
-with open('words.txt') as f:
-    words = f.readlines()
+"""with open('words.txt') as f:
+    words = f.readlines()"""
+lang = input('Press Y/y to load default (English) database or N/n to provide database.txt file : ')
+
+if lang == 'y' or lang == 'Y':
+    with open('words.txt') as f:
+            words = f.readlines()
+else:
+    user_input = input("Enter the path of your file : ")
+
+    try:
+        assert os.path.exists(user_input), "I did not find the file at, " + str(user_input)
+        f = open(user_input, 'r')
+        print(" \n The file was found ")
+    except:
+        print(" No such file in the directory. We are going to proceed with English Database    ")
+        user_input = 'words.txt'
+
+    with open(user_input) as f:
+        words = f.readlines()
+
+f.close()
 
 root = Tr1.TrieNode('')
 
