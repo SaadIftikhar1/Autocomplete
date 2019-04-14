@@ -1,9 +1,9 @@
 """
+Prefix Trie Data Structure
 Code based on the original code at : https://gist.github.com/tizz98/fbad67ac008b21e53c292543a32dfbac
 Author of original code : Elijah Wilson
 """
 
-from operator import itemgetter
 
 
 class TrieNode:
@@ -41,27 +41,3 @@ class TrieNode:
 
 
 
-def autocomplete(string: str, hug_timer):
-    split_words = string.split()
-    last_word = split_words[-1]
-    prefix = ' '.join(split_words[:-1])
-
-    suggestions = root.find_all(last_word)
-
-    full_suggestions = []
-
-    for suggestion in suggestions:
-        full_suggestions.append((
-            '{}{}'.format((prefix + ' ') if prefix else '', suggestion[0]),
-            suggestion[1],
-        ))
-
-    sorted_suggestions = sorted(
-        full_suggestions,
-        key=itemgetter(1),
-        reverse=True,
-    )
-
-    return {
-        'words': list(map(itemgetter(0), sorted_suggestions)),
-        'time_taken': hug_timer,}
