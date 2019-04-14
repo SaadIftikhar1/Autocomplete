@@ -3,9 +3,6 @@ Prefix Trie Data Structure
 Code based on the original code at : https://gist.github.com/tizz98/fbad67ac008b21e53c292543a32dfbac
 Author of original code : Elijah Wilson
 """
-
-
-
 class TrieNode:
     __slots__ = ('value', 'end_of_word', 'children', 'weight')
 
@@ -25,7 +22,7 @@ class TrieNode:
         node = self.children.setdefault(first_char, TrieNode(first_char))
         node.add_word(word_part[1:], weight=weight)
 
-    def find_all(self, word_part: str, path: str=""):
+    def find_all(self, word_part: str, path: str= ""):
         if self.end_of_word:
             yield path + self.value, self.weight
 
@@ -38,6 +35,10 @@ class TrieNode:
         else:
             for node in self.children.values():
                 yield from node.find_all("", path + self.value)
+
+
+
+
 
 
 
