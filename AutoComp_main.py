@@ -80,7 +80,7 @@ while 1:
         counter = len(suggestion)
     else:
         counter = int(sug_count)
-    print(suggestion[0:counter])
+    print((',    '.join(suggestion[0:counter])))
 
 
 
