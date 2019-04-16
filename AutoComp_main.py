@@ -13,6 +13,7 @@ import Trie_Struct as Tr
 from operator import itemgetter
 import Trie_gen as Tr1
 import tqdm
+from random import randint
 import os
 
 
@@ -31,8 +32,8 @@ def auto_complete(query):  # the basic code structure provided in https://gist.g
 
     sorted_suggestions = sorted(full_sentence, key = itemgetter(1), reverse=True, )
 
-    return list(map(itemgetter(0), sorted_suggestions))
-
+    # return list(map(itemgetter(0), sorted_suggestions))
+    return sorted_suggestions
 
 lang = input('Press Y/y to load default (English) database or N/n to provide database.txt file : ') # load the word database
 
@@ -59,7 +60,7 @@ f.close()
 root = Tr1.TrieNode("")
 
 for word in tqdm.tqdm(words):
-    root.add_word(word.strip('\n'))
+    root.add_word(word.strip('\n'), randint(1,8))
 
 del words
 
@@ -70,17 +71,21 @@ sug_count = input("kindly input required suggestion number  :   ")   # Number of
 while 1:
 
     query = input("Enter the Word  :   ")
-    root.add_word(query)
+    root.add_word(query, 9)
     f = open('words.txt', 'a')
     f.write(query + "\n")
     f.close()
 
     suggestion = auto_complete(query)
+    suggestion = sorted(suggestion, key=lambda x: int(x[1]), reverse=True)
+    auto = []
     if len(suggestion) < int(sug_count):
         counter = len(suggestion)
     else:
         counter = int(sug_count)
-    print((',    '.join(suggestion[0:counter])))
+    for i in range(0,counter):
+        auto.append(suggestion[i][0])
+    print((',    '.join(auto)))
 
 
 

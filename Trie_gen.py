@@ -12,8 +12,8 @@ class TrieNode:
         self.children = {}
         self.weight = -1
 
-    def add_word(self, word_part: str, *, weight: int=-1) -> None:
-        if len(word_part) == 0:
+    def add_word(self, word_part: str, weight: int=-1) -> None:
+        if len(word_part) == 0 :
             self.end_of_word = True
             self.weight = weight
             return

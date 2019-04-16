@@ -1,7 +1,9 @@
+
 from flask import Flask, render_template, request
 from operator import itemgetter
 import tqdm
 import os
+from random import randint
 import Trie_gen as Tr1
 
 app = Flask(__name__)
@@ -32,7 +34,7 @@ f.close()
 root = Tr1.TrieNode('')
 
 for word in tqdm.tqdm(words):
-   root.add_word(word.strip('\n'))
+   root.add_word(word.strip('\n'), randint(1,8))
 
 del words
 
@@ -41,7 +43,7 @@ del words
 def autocomplete():
     if request.method == 'POST':
         query = request.form["Enter Query"]
-        root.add_word(query)
+        root.add_word(query,9)
         f = open('words.txt', 'a')
         f.write(query + "\n")
         f.close()
@@ -61,13 +63,23 @@ def autocomplete():
 
         sorted_suggestions = sorted(full_sentence, key=itemgetter(1), reverse=True, )
 
-        auto_comp = list(map(itemgetter(0), sorted_suggestions))
+        # auto_comp = list(map(itemgetter(0), sorted_suggestions))
+        suggestion = sorted(sorted_suggestions, key=lambda x: int(x[1]), reverse=True)
+        auto = []
+        if len(suggestion) < int(sug_count):
+            counter = len(suggestion)
+        else:
+            counter = int(sug_count)
+        for i in range(0, counter):
+            auto.append(suggestion[i][0])
+        return render_template("index.html", suggestion=(',    '.join(auto)), numero=sug_count)
 
-        if len(auto_comp) < int(sug_count):
+
+        """if len(auto_comp) < int(sug_count):
             counter = len(auto_comp)
         else:
             counter = int(sug_count)
-        return render_template("index.html", suggestion=(',    '.join(auto_comp[0:counter])), numero=sug_count)
+        return render_template("index.html", suggestion=(',    '.join(auto_comp[0:counter])), numero=sug_count)"""
     else:
         query = request.args.get["Enter Query"]
         root.add_word(query)
@@ -91,6 +103,7 @@ def autocomplete():
 
         sorted_suggestions = sorted(full_sentence, key=itemgetter(1), reverse=True, )
 
+        """    
         auto_comp = list(map(itemgetter(0), sorted_suggestions))
 
         if len(auto_comp) < int(sug_count):
@@ -98,9 +111,19 @@ def autocomplete():
         else:
             counter = int(sug_count)
         return render_template("index.html", suggestion=(',    '.join(auto_comp[0:counter])), numero=sug_count)
-
+        """
+        suggestion = sorted(sorted_suggestions, key=lambda x: int(x[1]), reverse=True)
+        auto = []
+        if len(suggestion) < int(sug_count):
+            counter = len(suggestion)
+        else:
+            counter = int(sug_count)
+        for i in range(0, counter):
+            auto.append(suggestion[i][0])
+        return render_template("index.html", suggestion=(',    '.join(auto)), numero=sug_count)
 
 if __name__ == '__main__':
     app.run()
+
 
 
