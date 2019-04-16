@@ -20,8 +20,8 @@ https://github.com/rakibtg/Python-Chat-App
     <style>
       div.msg_bbl {
         background-color: #ddd;
-        font-size: 200px;
-        padding: 5px 10px;
+        font-size: 15px;
+        padding: 5px 20px;
         border-radius: 20px;
         color: #555;
         margin-bottom: 5px;
@@ -80,13 +80,15 @@ https://github.com/rakibtg/Python-Chat-App
           $( 'input.username' ).val( '' ).focus()
         } )
       } )
+
+
       // capture message
       socket.on( 'my response', function( msg ) {
         console.log( msg )
         if( typeof msg !== 'undefined' ) {
           $( 'h2' ).remove()
           $( 'div.message_holder' ).empty()
-          $( 'div.message_holder' ).append(msg)
+           $( 'div.message_holder' ).append( '<div class="msg_bbl"><b style="color: #000">'+msg+'</b> ','</div>' )
         }
       } )
     </script>
